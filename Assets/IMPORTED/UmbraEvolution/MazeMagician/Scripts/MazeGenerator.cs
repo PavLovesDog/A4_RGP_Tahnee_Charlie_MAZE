@@ -2308,8 +2308,12 @@ namespace UmbraEvolution.UmbraMazeMagician
                         {
                             if (Random.Range(0f, 1f) <= otherObjects[detailIndex].frequency)//RNGesus determines if the object will be placed on this tile or not depending on your frequency value
                             {
-                                GameObject tempDetail = Instantiate(otherObjects[detailIndex].detailPrefab, new Vector3(column * tileWidthAndLength + Random.Range(otherObjects[detailIndex].minXOffset, otherObjects[detailIndex].maxXOffset), Random.Range(otherObjects[detailIndex].minHeight, otherObjects[detailIndex].maxHeight), row * mazeTileWidthAndLength + Random.Range(otherObjects[detailIndex].minZOffset, otherObjects[detailIndex].maxZOffset)) + mazeTransform.position, mazeTransform.rotation);
-                                tempDetail.transform.Rotate(transform.up, Random.Range(0f, 360f));
+                                Vector3 position = new Vector3(column * tileWidthAndLength + Random.Range(otherObjects[detailIndex].minXOffset, otherObjects[detailIndex].maxXOffset), Random.Range(otherObjects[detailIndex].minHeight, otherObjects[detailIndex].maxHeight), row * mazeTileWidthAndLength + Random.Range(otherObjects[detailIndex].minZOffset, otherObjects[detailIndex].maxZOffset)) + mazeTransform.position;
+                                Quaternion yRotationOffset = Quaternion.Euler(0, otherObjects[detailIndex].YRotationOffset, 0);
+                                Quaternion rotation = mazeTransform.rotation * yRotationOffset;
+                                GameObject tempDetail = Instantiate(otherObjects[detailIndex].detailPrefab, position, rotation);
+                                if(otherObjects[detailIndex].useRandomRotation)
+                                    tempDetail.transform.Rotate(transform.up, Random.Range(0f, 360f));
                                 tempDetail.transform.parent = mazeTransform;
                                 tempDetail.name = "Detail(" + otherObjects[detailIndex].detailName + ")";
                             }

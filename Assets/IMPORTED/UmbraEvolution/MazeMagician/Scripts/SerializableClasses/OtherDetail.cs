@@ -26,6 +26,10 @@ namespace UmbraEvolution.UmbraMazeMagician
         public float minHeight;
         [Tooltip("The maximum height from the floor that this detail will be placed.")]
         public float maxHeight;
+        [Tooltip("A switch to add a random rotation to every instance of spawned object.")]
+        public bool useRandomRotation;
+        [Tooltip("The rotation offset along the y-axis to set the rotation of object.")]
+        public float YRotationOffset;
         [Tooltip("The minimum offset along the x-axis of the maze relative to the center of a tile.")]
         public float minXOffset;
         [Tooltip("The maximum offset along the x-axis of the maze relative to the center of a tile.")]
